@@ -1,0 +1,49 @@
+
+{% extends "base.html" %}
+
+
+{% block title %}Carros{% endblock %}
+
+
+{% block content %}
+
+
+
+    <div class="container py-2 ">
+
+        <div class="d-flex flex-column align-items-center mb-3">
+
+            {% if object.photo  %}
+                 <img src="{{object.photo.url}}" alt="{{object.model}}" style="width=250px; height: 250px;"/>
+            {% else %}
+                <p>Sem foto para mostrar</p>
+            {% endif %}
+
+            
+            <span class="fs-3">{{object.model}} - {{object.brand}}</span>
+            <span class="fs-5" ><strong>Ano de frabricação:</strong> {{object.factory_year}}</span>
+            <span class="fs-5" ><strong>Ano do modelo:</strong> {{object.model_year}}</span>
+            <span class="fs-5" ><strong>Placa:</strong> {{object.plate}}</span>
+            <span class="fs-5" ><strong>Preço:</strong> R${{object.value}}</span>
+
+            {% if object.bio %}
+                <span class="fs-5" ><strong>Bio:</strong> {{object.bio}}</span>
+            {% endif %}
+
+        </div>
+
+        {%if user.is_authenticated %}
+                
+            
+            <div class="container d-flex gap-2 justify-content-center">
+                <a a href="{% url 'car_update' pk=object.pk %}" class="btn btn-primary" >Editar</a>
+                <a a href="{% url 'car_delete' pk=object.pk %}" class="btn btn-danger" >Excluir</a>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+ 
+    
+{% endblock %}

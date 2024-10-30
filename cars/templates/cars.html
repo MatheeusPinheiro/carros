@@ -1,0 +1,61 @@
+
+{% extends "base.html" %}
+
+
+{% block title %}Carros{% endblock %}
+
+
+{% block content %}
+
+
+<div class="mb-3">
+
+    <form method="GET" >
+
+        <div class="containter d-flex justify-content-end my-5">
+            <input placeholder="Busque por uma marca ou modelo de carro..." class="form-control w-50" type="search" name="search" id="search" />
+        </div>
+
+    </form>
+
+<div>
+
+<div class="container d-flex justify-content-between align-items-center flex-wrap">
+
+    {% if cars %}
+        
+        {% for car in cars  %}
+
+
+        
+
+            <div class="border-2 ">
+                <a class="d-flex flex-column align-items-center justify-content-center nav-link" href="{% url 'car_detail' car.pk %}">
+                    
+
+                    {% if car.photo %}
+                        <img src="{{ car.photo.url }}" alt="" width="250px"/>
+
+                    {% else %}
+                        <p>Sem foto para mostrar</p>
+                    {% endif %}
+
+                    <div class="fs-3"><strong>{{ car.brand }} </strong>- {{ car.model }}</div>
+                    <div class="">R$ {{ car.value }}</div>
+                </a>
+            </div>
+
+        
+
+        {% endfor %}
+
+        {% else %}
+            <h3>Nenhum carro encontrado.</h3>
+
+    {% endif %}
+
+</div>
+ 
+ 
+    
+{% endblock %}
